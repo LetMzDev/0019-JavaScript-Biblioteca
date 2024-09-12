@@ -12,9 +12,23 @@ const link = caminho_Arquivo [ 2 ];
 */
 fs.readFile ( link, 'utf-8', ( erro, texto ) => 
 {
-	console.log ( texto )
+	Verificar_Palavras_Duplicadas ( texto );
 })
 
-// console.log ( caminho_Arquivo );
-// console.log ( `---\n` );
-// console.log ( link );
+// criar um array com as palavras
+// contar as ocorrências
+// montar um objeto com o resultado
+
+function Verificar_Palavras_Duplicadas ( texto )
+{
+	// Onde tiver espaço no texto pegará a palavra anterior e colocará como um elemento no array. e lista_Palavras irá conter todas as palavras do texto.
+	const lista_Palavras = texto.split ( ' ' );
+	const resultado = {};
+
+	lista_Palavras.forEach ( palavra =>
+	{
+		resultado [ palavra ] = ( resultado [ palavra ] || 0 ) + 1;
+	})
+
+	console.log ( resultado );
+}
