@@ -12,12 +12,21 @@ const link = caminho_Arquivo [ 2 ];
 */
 fs.readFile ( link, 'utf-8', ( erro, texto ) => 
 {
-	Verificar_Palavras_Duplicadas ( texto );
+	Quebrar_Em_Paragrafos ( texto );
 })
 
-// criar um array com as palavras
-// contar as ocorrências
-// montar um objeto com o resultado
+function Quebrar_Em_Paragrafos ( texto )
+{
+	// Converte todo o texto em letras minúsculas e adiciona cada parágrafo em um elemento do array.
+	const paragrafos = texto.toLowerCase().split ( '\n' );
+
+	const contagem  = paragrafos.map (( paragrafo ) =>
+	{
+		return Verificar_Palavras_Duplicadas ( paragrafo );
+	})
+
+	console.log ( contagem );
+}
 
 function Verificar_Palavras_Duplicadas ( texto )
 {
@@ -30,5 +39,5 @@ function Verificar_Palavras_Duplicadas ( texto )
 		resultado [ palavra ] = ( resultado [ palavra ] || 0 ) + 1;
 	})
 
-	console.log ( resultado );
+	return resultado;
 }
