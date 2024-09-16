@@ -28,6 +28,11 @@ function Quebrar_Em_Paragrafos ( texto )
 	console.log ( contagem );
 }
 
+function Limpar_Palavras ( palavra )
+{
+	return palavra.replace( /[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '' ); // Expressões regulares
+}
+
 function Verificar_Palavras_Duplicadas ( texto )
 {
 	// Onde tiver espaço no texto pegará a palavra anterior e colocará como um elemento no array. e lista_Palavras irá conter todas as palavras do texto.
@@ -36,7 +41,11 @@ function Verificar_Palavras_Duplicadas ( texto )
 
 	lista_Palavras.forEach ( palavra =>
 	{
-		resultado [ palavra ] = ( resultado [ palavra ] || 0 ) + 1;
+		if ( palavra.length >= 3 )
+		{
+			const palavra_Limpa = Limpar_Palavras ( palavra );
+			resultado [ palavra_Limpa ] = ( resultado [ palavra_Limpa ] || 0 ) + 1;
+		}
 	})
 
 	return resultado;
