@@ -7,13 +7,18 @@ const link = caminho_Arquivo [ 2 ];
 
 fs.readFile ( link, 'utf-8', ( erro, texto ) => 
 {
-	if ( erro )
+	try
 	{
-		console.log ( "Qual o erro? ", erro.code );
-		return
+		if ( erro ) throw erro
+		Contar_Palavras ( texto );
 	}
-
-	Contar_Palavras ( texto );
+	catch ( erro )
+	{
+		if ( erro === "ENOENT")
+			console.log ( "Erro nome do arquivo" );
+		else
+			console.log ( "Outro erro" );
+	}
 })
 
 function Contar_Palavras ( texto )
