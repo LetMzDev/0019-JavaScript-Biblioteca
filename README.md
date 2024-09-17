@@ -16,3 +16,7 @@ ___
 ## Chalk
 - [Documentação](https://www.npmjs.com/package/chalk)
 - `npm install chalk`
+___
+
+# Outros
+- [Convenção Semantic Versioning](https://semver.org/)
