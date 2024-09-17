@@ -9,6 +9,7 @@ import { Contar_Palavras } from './index.js';
 import { Montar_Saida_Arquivo } from './helpers.js';
 
 import { Command } from 'commander';
+import chalk from 'chalk';
 
 const program = new Command (); // Criando uma instância da biblioteca
 
@@ -22,7 +23,7 @@ program
 
 		if ( !texto || !destino )
 		{
-			console.erro ( "Erro, por favor inserir caminho de origem e destino" );
+			console.erro ( chalk.red ( "Erro, por favor inserir caminho de origem e destino" ));
 			program.help;
 			return;
 		}
@@ -33,7 +34,7 @@ program
 		try
 		{
 			Processar_Arquivo ( caminho_Texto, caminho_Destino );
-			console.log ( "Texto processado com sucesso." );
+			console.log ( chalk.green ( "Texto processado com sucesso." ));
 		}
 
 		catch ( erro )

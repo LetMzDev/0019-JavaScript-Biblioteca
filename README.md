@@ -10,3 +10,9 @@ ___
 # Biblioteca
 ## Commander.js
 - [Documentação](https://www.npmjs.com/package/commander)
+- `npm install commander`
+___
+
+## Chalk
+- [Documentação](https://www.npmjs.com/package/chalk)
+- `npm install chalk`
