@@ -25,22 +25,23 @@ fs.readFile ( link, 'utf-8', ( erro, texto ) =>
 	}
 })
 
-// async function Criar_Salvar_Arquivo ( lista_palavras, endereco )
-// {
-// 	const novo_Arquivo = `${endereco}/resultado.txt`;
-// 	const texto_Palavras = JSON.stringify ( lista_palavras );
+async function Criar_Salvar_Arquivo ( lista_palavras, endereco )
+{
+	const novo_Arquivo = `${endereco}/resultado.txt`;
+	const texto_Palavras = JSON.stringify ( lista_palavras );
 
-// 	try
-// 	{
-// 		await fs.promises.writeFile ( novo_Arquivo, texto_Palavras );
-// 		console.log ( "Arquivo criado" );
-// 	}
-// 	catch ( erro )
-// 	{
-// 		throw erro;
-// 	}
-// }
+	try
+	{
+		await fs.promises.writeFile ( novo_Arquivo, texto_Palavras );
+		console.log ( "Arquivo criado" );
+	}
+	catch ( erro )
+	{
+		throw erro;
+	}
+}
 
+/*
 function Criar_Salvar_Arquivo ( lista_palavras, endereco )
 {
 	const novo_Arquivo = `${endereco}/resultado.txt`;
@@ -61,3 +62,4 @@ function Criar_Salvar_Arquivo ( lista_palavras, endereco )
 			console.log ( "Operação finalizada" );
 		})
 }
+*/
