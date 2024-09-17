@@ -3,22 +3,40 @@ import fs from 'fs';
 import Tratar_Erros from './erros/funcoes_Erro.js';
 import { Contar_Palavras } from './index.js';
 
-// node .\cli.js ../arquivos/texto-web.txt
+// node .\cli.js ../arquivos/texto-web.txt ../resultados/
 
 const caminho_Arquivo = process.argv;
 const link = caminho_Arquivo [ 2 ];
+const endereco = caminho_Arquivo [ 3 ];
 
 fs.readFile ( link, 'utf-8', ( erro, texto ) =>
+{
+	try
 	{
-		try
-		{
-			if ( erro )
-				throw erro
+		if ( erro )
+			throw erro
 
-			Contar_Palavras ( texto );
-		}
-		catch ( erro )
-		{
-			Tratar_Erros ( erro );
-		}
-	})
+		const resultado = Contar_Palavras ( texto );
+		Criar_Salvar_Arquivo ( resultado, endereco );
+	}
+	catch ( erro )
+	{
+		Tratar_Erros ( erro );
+	}
+})
+
+async function Criar_Salvar_Arquivo ( lista_palavras, endereco )
+{
+	const novo_Arquivo = `${endereco}/resultado.txt`;
+	const texto_Palavras = JSON.stringify ( lista_palavras );
+
+	try
+	{
+		await fs.promises.writeFile ( novo_Arquivo, texto_Palavras );
+		console.log ( "Arquivo criado" );
+	}
+	catch ( erro )
+	{
+		throw erro;
+	}
+}

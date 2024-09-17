@@ -10,7 +10,7 @@ export function Contar_Palavras ( texto )
 		return Verificar_Palavras_Duplicadas ( paragrafo );
 	})
 
-	console.log ( contagem );
+	return contagem;
 }
 
 function Extrair_Paragrafo ( texto )
