@@ -1,27 +1,4 @@
-const fs = require ( 'fs' ); // Importa o File System
-const tratar_Erros = require ( "./erros/funcoes_Erro" );
-
-// node .\index.js ../arquivos/texto-web.txt
-
-const caminho_Arquivo = process.argv;
-const link = caminho_Arquivo [ 2 ];
-
-fs.readFile ( link, 'utf-8', ( erro, texto ) => 
-{
-	try
-	{
-		if ( erro )
-			throw erro
-
-		Contar_Palavras ( texto );
-	}
-	catch ( erro )
-	{
-		tratar_Erros ( erro );
-	}
-})
-
-function Contar_Palavras ( texto )
+export function Contar_Palavras ( texto )
 {
 	const paragrafos = Extrair_Paragrafo ( texto );
 
