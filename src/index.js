@@ -1,4 +1,5 @@
 const fs = require ( 'fs' ); // Importa o File System
+const tratar_Erros = require ( "./erros/funcoes_Erro" );
 
 // node .\index.js ../arquivos/texto-web.txt
 
@@ -9,15 +10,14 @@ fs.readFile ( link, 'utf-8', ( erro, texto ) =>
 {
 	try
 	{
-		if ( erro ) throw erro
+		if ( erro )
+			throw erro
+
 		Contar_Palavras ( texto );
 	}
 	catch ( erro )
 	{
-		if ( erro === "ENOENT")
-			console.log ( "Erro nome do arquivo" );
-		else
-			console.log ( "Outro erro" );
+		tratar_Erros ( erro );
 	}
 })
 
