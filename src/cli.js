@@ -1,10 +1,31 @@
 //  CLI é a sigla para Command Line Interface ( Interface de Linha de Comando )
+// node .\cli.js ../arquivos/texto-web.txt ../resultados/
+
 import fs from 'fs';
 import Tratar_Erros from './erros/funcoes_Erro.js';
 import { Contar_Palavras } from './index.js';
 import { Montar_Saida_Arquivo } from './helpers.js';
 
-// node .\cli.js ../arquivos/texto-web.txt ../resultados/
+import { Command } from 'commander';
+
+const program = new Command (); // Criando uma instância da biblioteca
+
+program
+	.version ( '0.0.1' )
+	.option ( '-t, --texto <string>', 'Caminho do texto a ser processado' )
+	.option ( '-d, --destino <string>', 'Caminho da pasta onde salvar o arquivo de resultados' )
+	.action (( options ) =>
+	{
+		const { texto, destino } = options;
+
+		if ( !texto || !destino )
+		{
+			console.erro ( "Erro, por favor inserir caminho de origem e destino" );
+			program.help;
+			return;
+		}
+
+	})
 
 const caminho_Arquivo = process.argv;
 const link = caminho_Arquivo [ 2 ];
