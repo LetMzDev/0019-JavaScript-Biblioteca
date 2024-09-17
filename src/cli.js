@@ -1,7 +1,9 @@
 //  CLI é a sigla para Command Line Interface ( Interface de Linha de Comando )
-// node .\cli.js ../arquivos/texto-web.txt ../resultados/
+// node .\cli.js -t ../arquivos/texto-web.txt -d ../resultados/
 
 import fs from 'fs';
+import path from 'path';
+
 import Tratar_Erros from './erros/funcoes_Erro.js';
 import { Contar_Palavras } from './index.js';
 import { Montar_Saida_Arquivo } from './helpers.js';
@@ -16,7 +18,7 @@ program
 	.option ( '-d, --destino <string>', 'Caminho da pasta onde salvar o arquivo de resultados' )
 	.action (( options ) =>
 	{
-		const { texto, destino } = options;
+		const { texto, destino } = options; // Destruturação ( duas variáveis distintas )
 
 		if ( !texto || !destino )
 		{
@@ -25,27 +27,45 @@ program
 			return;
 		}
 
+		const caminho_Texto = path.resolve ( texto );
+		const caminho_Destino = path.resolve ( destino );
+
+		try
+		{
+			Processar_Arquivo ( caminho_Texto, caminho_Destino );
+			console.log ( "Texto processado com sucesso." );
+		}
+
+		catch ( erro )
+		{
+			console.log ( "Ocorreu um erro no processamento.", erro );
+		}
 	})
 
-const caminho_Arquivo = process.argv;
-const link = caminho_Arquivo [ 2 ];
-const endereco = caminho_Arquivo [ 3 ];
+program.parse();
 
-fs.readFile ( link, 'utf-8', ( erro, texto ) =>
+// const caminho_Arquivo = process.argv;
+// const link = caminho_Arquivo [ 2 ];
+// const endereco = caminho_Arquivo [ 3 ];
+
+function Processar_Arquivo (texto, destino )
 {
-	try
+	fs.readFile ( texto, 'utf-8', ( erro, texto ) =>
 	{
-		if ( erro )
-			throw erro
+		try
+		{
+			if ( erro )
+				throw erro
 
-		const resultado = Contar_Palavras ( texto );
-		Criar_Salvar_Arquivo ( resultado, endereco );
-	}
-	catch ( erro )
-	{
-		Tratar_Erros ( erro );
-	}
-})
+			const resultado = Contar_Palavras ( texto );
+			Criar_Salvar_Arquivo ( resultado, destino );
+		}
+		catch ( erro )
+		{
+			Tratar_Erros ( erro );
+		}
+	})
+}
 
 async function Criar_Salvar_Arquivo ( lista_palavras, endereco )
 {
