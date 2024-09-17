@@ -2,6 +2,7 @@
 import fs from 'fs';
 import Tratar_Erros from './erros/funcoes_Erro.js';
 import { Contar_Palavras } from './index.js';
+import { Montar_Saida_Arquivo } from './helpers.js';
 
 // node .\cli.js ../arquivos/texto-web.txt ../resultados/
 
@@ -28,7 +29,7 @@ fs.readFile ( link, 'utf-8', ( erro, texto ) =>
 async function Criar_Salvar_Arquivo ( lista_palavras, endereco )
 {
 	const novo_Arquivo = `${endereco}/resultado.txt`;
-	const texto_Palavras = JSON.stringify ( lista_palavras );
+	const texto_Palavras = Montar_Saida_Arquivo ( lista_palavras );
 
 	try
 	{
